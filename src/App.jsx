@@ -4,11 +4,12 @@ import './App.css'
 
 
 function App() {
+  //Get geolocation here or something
+  const city = "Stockholm";
 
   return (
     <>
-      OverCast Weather
-      <TopBar></TopBar>
+      <TopBar city={city}></TopBar>
     </>
   )
 }
