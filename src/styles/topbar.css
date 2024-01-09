@@ -1,0 +1,14 @@
+.maindiv {
+    
+    text-align: -webkit-center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    float: left;
+    width: 100%;
+    height: 26vh;
+}
+
+.subdiv {
+    background-color: grey;
+    width: 40%;
+}
