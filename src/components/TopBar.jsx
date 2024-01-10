@@ -11,6 +11,7 @@ import '../styles/topbar.css';
 import nightImg from "../assets/nighttime.png";
 import dayImg from "../assets/daytime.png";
 import SearchBar from "./SearchBar";
+import FavBar from "./FavBar";
 
 const TopBar = (props) => {
 
@@ -19,7 +20,7 @@ const TopBar = (props) => {
     //state & refs
 
 
-    const {city, updateCity} = useContext(CityContext);
+    const {city, updateCity, favArr, setFavArr} = useContext(CityContext);
     //const [city, setCity] = useState(props.city);
     const [weatherData, setWeather] = useState({Time: "", Img: "", Temp: ""});
     const [nightTime, setDayTime] = useState(false);
@@ -59,9 +60,25 @@ const TopBar = (props) => {
         weatherData.Img.includes("night") ? setBanner(nightImg) : setBanner(dayImg);
         //this one sets the css!
         //console.log("Is it night?" + nightTime);
-        console.log(todBanner);
     }
     
+    const addFavs = () => {
+        const arrData = localStorage.getItem("favArr");
+        const newCity = city;
+        if (arrData === null){
+            localStorage.setItem("favArr", JSON.stringify([newCity]));
+            setFavArr([newCity]);
+        } else {
+            const newData = JSON.parse(arrData);
+            if (newData.includes(newCity)){
+                console.log("already added this city")
+                return;
+            }
+            newData.push(newCity);
+            localStorage.setItem("favArr", JSON.stringify(newData));
+            setFavArr(newData);
+        }
+    }
 
     //wash data
 
@@ -84,12 +101,13 @@ const TopBar = (props) => {
                         <img src={weatherData.Img}></img>
                     </p>
                     <button>See details</button>
-
+                    <button onClick={addFavs}>Add Favorites</button>
                 </div>
             </div>
             <div style={{flex: "wrap"}}>
                 <SearchBar style={{float: "left"}}></SearchBar>
                 <DetailsBar city={city}></DetailsBar>
+                <FavBar></FavBar>
             </div>
         </>
     )
