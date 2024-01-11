@@ -1,14 +1,36 @@
 .maindiv {
-    
+    border-radius: 10px;
     text-align: -webkit-center;
     background-repeat: no-repeat;
     background-size: cover;
     float: left;
     width: 100%;
-    height: 26vh;
+    height: 30%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding-bottom: 5vh;
+    /* margin-bottom: 20vh; */
 }
 
 .subdiv {
     background-color: grey;
     width: 40%;
+    background-color: rgba(255,255,255,0.5);
+    -webkit-text-stroke-width: thin;
+    border-radius: 10px;
+    height: 108%;
+}
+
+.bottomData {
+    padding-top: 39vh;
+    margin-top: 0vh;
+}
+
+
+.cityP {
+    font-size: 3vw;
+    margin-top: 3%;
+}
+
+.pData {
+    margin-top: -3vw;
 }
