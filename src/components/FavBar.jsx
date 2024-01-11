@@ -1,5 +1,7 @@
 import { useRef, useState, useEffect, useContext } from "react";
 import { CityContext } from "../contexts/ContextProvider";
+import bin_svg from "../assets/bin.svg"
+import '../styles/favbar.css';
 
 
 const FavBar = () => {
@@ -23,14 +25,16 @@ const FavBar = () => {
     const unitMapper = () => {
         console.log("im the storage " + favArr);
         if(favArr.length === 0){
-            return <p>No favourites</p>;
+            return <p>No Favourites</p>;
         }
         return(
             <div>
                 {favArr.map((town, i) => 
-                    <div key={i} style={{}}>
-                        <p>{town}</p>
-                        <button>Bin</button>
+                    <div key={i} className="favComp">
+                        <p style={{float: "left"}}>{town}</p>
+                        <button style={{float: "right", backgroundColor: "aquamarine"}}>
+                            <img src={bin_svg} width="20px"></img>
+                        </button>
                     </div>
                 )}
             
@@ -39,8 +43,8 @@ const FavBar = () => {
     }
 
     return(
-        <div>
-            <p>Im favourites</p>
+        <div className="favbar">
+            <p style={{fontSize: "large", fontWeight: "bold"}}>My Favourites</p>
             {unitMapper()}
         </div>
     )

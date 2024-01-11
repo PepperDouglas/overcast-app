@@ -91,21 +91,21 @@ const TopBar = (props) => {
         <>
             <div className="maindiv" style={{backgroundImage: `url(${todBanner})`}}>
                 <div className="subdiv">
-                    <p>
-                        This is some weather data for {city}
+                    <p className="cityP">
+                        {city}
                     </p>
-                    <p>
+                    <p className="pData">
                         Temperature: {weatherData.Temp} C, Time: {weatherData.Time}
                     </p>
                     <p>
-                        <img src={weatherData.Img}></img>
+                        <img src={weatherData.Img} style={{width: "10vw", backgroundColor: "white", borderRadius: "10%", border: "2px solid black"}}></img>
                     </p>
                     <button>See details</button>
                     <button onClick={addFavs}>Add Favorites</button>
                 </div>
             </div>
-            <div style={{flex: "wrap"}}>
-                <SearchBar style={{float: "left"}}></SearchBar>
+            <div className="bottomData">
+                <SearchBar></SearchBar>
                 <DetailsBar city={city}></DetailsBar>
                 <FavBar></FavBar>
             </div>

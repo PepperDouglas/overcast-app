@@ -1,0 +1,25 @@
+.favbar {
+    border: 2px solid black;
+    width: 29%;
+    float: right;
+    margin-left: 2px;
+}
+
+.favComp {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 2%;
+    padding-top: 2%;
+    background-color: azure;
+    font-size: large;
+    border: 2px solid aquamarine;
+}
+
+.favComp:hover {
+    background-color: rgb(47, 178, 195);
+}
+
