@@ -6,14 +6,14 @@ import './App.css'
 
 function App() {
   //Get geolocation here or something
-  const city = "Stockholm";
+  const startCity = "Stockholm";
 
   //App should make the request and send the data down??
 
   return (
     <>
       <ContextProvider>
-        <TopBar city={city}></TopBar>
+        <TopBar cityprop={startCity}></TopBar>
       </ContextProvider>
     </>
   )
