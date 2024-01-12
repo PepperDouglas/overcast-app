@@ -5,6 +5,7 @@
 import { useRef, useState, useEffect, useContext } from "react";
 import { CityContext } from "../contexts/ContextProvider";
 import DetailsBar from "./DetailsBar";
+import { capitaliseFirstLetter } from "../functions/searchFunct";
 import { apiKey } from "../constants/constants";
 import WeatherData from "../classes/WeatherData";
 import '../styles/topbar.css';
@@ -13,45 +14,67 @@ import dayImg from "../assets/daytime.png";
 import SearchBar from "./SearchBar";
 import FavBar from "./FavBar";
 
-const TopBar = (props) => {
+const TopBar = ({cityprop}) => {
 
     //style
 
     //state & refs
 
 
-    const {city, updateCity, favArr, setFavArr} = useContext(CityContext);
+    const {city, updateCity, favArr, setFavArr, longlatcoord, tempCity, isDetailsShown, setShowDetails} = useContext(CityContext);
     //const [city, setCity] = useState(props.city);
     const [weatherData, setWeather] = useState({Time: "", Img: "", Temp: ""});
     const [nightTime, setDayTime] = useState(false);
+    const [isFirstLoad, setFirstLoad] = useState(true);
     const [todBanner, setBanner] = useState(dayImg);
 
     //functions
-    async function getCountryData () {
-        const geoLocation = "";
-                const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
-                return await fetch(url, {referrerPolicy: "unsafe-url"}).then(res => res.json())
-                .then(res => {
-                    if(res != undefined){
-                        const weather = new WeatherData(res.current.last_updated, res.current.temp_c, res.current.condition.icon)
-                        setWeather(weather);
-                        //changeBanner();
-                    }
-                });
+    async function getCountryData (param) {
+        if(param == "" || param === undefined){
+            return;
         }
+        const geoLocation = "";
+        console.log(param);
+        const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${param}`;
+        return await fetch(url, {referrerPolicy: "unsafe-url"}).then(res => {
+            if(!res.ok){
+                throw new Error("Bad Request");
+            }
+            return res.json();
+        })
+        .then(res => {
+            if(res != undefined){
+
+                const weather = new WeatherData(res.current.last_updated, res.current.temp_c, res.current.condition.icon)
+                setWeather(weather);
+                updateCity(capitaliseFirstLetter(res.location.name));
+            }
+        }).catch((error) => {
+            console.log("City not found." + error);
+        })
+    }
 
     useEffect(() => {
-        getCountryData();
-            
+        //here we could choose to use saved locale instead on load
+        console.log("Initial mounting!");
+        
+            //setFirstLoad(false);
+            getCountryData(cityprop);
+        
+
     }, []);
-
+    
     useEffect(() => {
-        changeBanner(); // Access the updated value here
+        changeBanner();
     }, [weatherData]);
 
     useEffect(() => {
-        getCountryData();
-    }, [city]);
+        getCountryData(tempCity);
+    }, [tempCity]);
+
+    useEffect(() => {
+        getCountryData(longlatcoord);
+    }, [longlatcoord])
     
         //getCountryData();
     const changeBanner = () => {
@@ -80,6 +103,17 @@ const TopBar = (props) => {
         }
     }
 
+    const invertDetails = (event) => {
+        //alert(event.target.innerText);
+        if(isDetailsShown){
+            event.target.innerText = "See Details";
+            setShowDetails(false);
+        } else {
+            event.target.innerText = "Hide Details";
+            setShowDetails(true);
+        }
+    }
+
     //wash data
 
     //mapping
@@ -100,7 +134,7 @@ const TopBar = (props) => {
                     <p>
                         <img src={weatherData.Img} style={{width: "10vw", backgroundColor: "white", borderRadius: "10%", border: "2px solid black"}}></img>
                     </p>
-                    <button>See details</button>
+                    <button onClick={() => invertDetails(event)}>See Details</button>
                     <button onClick={addFavs}>Add Favorites</button>
                 </div>
             </div>
