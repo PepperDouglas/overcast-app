@@ -122,20 +122,20 @@ const TopBar = ({cityprop}) => {
     //main return
 
     return(
-        <>
+        <div className="topbarContainer">
             <div className="maindiv" style={{backgroundImage: `url(${todBanner})`}}>
                 <div className="subdiv">
                     <p className="cityP">
                         {city}
                     </p>
                     <p className="pData">
-                        Temperature: {weatherData.Temp} C, Time: {weatherData.Time}
+                        Temperature: {weatherData.Temp}°C, {weatherData.Time}
                     </p>
                     <p>
-                        <img src={weatherData.Img} style={{width: "10vw", backgroundColor: "white", borderRadius: "10%", border: "2px solid black"}}></img>
+                        <img src={weatherData.Img} style={{width: "15%", backgroundColor: "white", borderRadius: "10%", border: "2px solid black"}}></img>
                     </p>
-                    <button onClick={() => invertDetails(event)}>See Details</button>
-                    <button onClick={addFavs}>Add Favorites</button>
+                    <button onClick={() => invertDetails(event)} style={{marginRight: "1%", marginBottom: "1%"}}>See Details</button>
+                    <button onClick={addFavs} style={{marginLeft: "1%", marginBottom: "1%"}}>Add Favorites</button>
                 </div>
             </div>
             <div className="bottomData">
@@ -143,7 +143,7 @@ const TopBar = ({cityprop}) => {
                 <DetailsBar city={city}></DetailsBar>
                 <FavBar></FavBar>
             </div>
-        </>
+        </div>
     )
         //SearchBar is not really supposed to be here, but wuth context it makes sense from a design perspective. But not from a logical one!
 }

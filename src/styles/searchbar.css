@@ -2,4 +2,31 @@
     border: 2px solid black;
     width: 29%;
     float: left;
+    background-color:aquamarine;
+    color: black;
+}
+
+.searchBarContents {
+    background-color: azure;
+    border: 2px solid aquamarine;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: space-between;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 3% 3%;
+}
+
+.searchButton {
+    background-color: aquamarine;
+    color: black;
+}
+
+@media only screen and (max-width: 750px) {
+    .searchBar{
+        width: 94%;
+    }
+
+    
 }
