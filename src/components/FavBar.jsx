@@ -6,7 +6,7 @@ import '../styles/favbar.css';
 
 const FavBar = () => {
 
-    const {city, updateCity, favArr, setFavArr} = useContext(CityContext);
+    const {city, updateCity, favArr, setFavArr, setTempCity} = useContext(CityContext);
     const favsData = localStorage.getItem("favArr"); 
     const initFavsArr = favsData ? JSON.parse(favsData) : [];
     //const [favArr, setFavArr] = useState(initFavsArr);
@@ -23,7 +23,7 @@ const FavBar = () => {
         const selectedCity = event.target.innerText;
         if(event.target instanceof HTMLDivElement || event.target instanceof HTMLParagraphElement){
             //Update city
-            updateCity(selectedCity);
+            setTempCity(selectedCity);
         } else {
             const arrData = localStorage.getItem("favArr");
             const newData = JSON.parse(arrData);
