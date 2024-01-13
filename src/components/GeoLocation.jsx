@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect, useContext } from "react";
 import { CityContext } from "../contexts/ContextProvider";
+import '../styles/geolocation.css'
 
 const GeoLocator = () => {
 
@@ -25,7 +26,7 @@ const GeoLocator = () => {
 
     return(
         <>
-            <button onClick={() => getGeoData()}>Locate me!</button>
+            <button className="locateBtn" onClick={() => getGeoData()}>Locate me!</button>
         </>
     )
 }

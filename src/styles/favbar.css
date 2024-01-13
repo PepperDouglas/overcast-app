@@ -2,7 +2,8 @@
     border: 2px solid black;
     width: 29%;
     float: right;
-    margin-left: 2px;
+    background-color: aquamarine;
+    color: black;
 }
 
 .favComp {
@@ -21,5 +22,13 @@
 
 .favComp:hover {
     background-color: rgb(47, 178, 195);
+}
+
+@media only screen and (max-width: 750px) {
+    .favbar{
+        width: 94%;
+    }
+
+    
 }
 

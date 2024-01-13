@@ -18,9 +18,11 @@ const SearchBar = () => {
     return(
         <div className="searchBar">
             <p style={{fontSize: "large", fontWeight: "bold"}}>Search for a city</p>
-            <input ref={countrySearch}></input>
-            <button onClick={searchClick}>Search</button>
-            <GeoLocator></GeoLocator>
+            <div className="searchBarContents">
+                <input ref={countrySearch} placeholder="Enter a city..."></input>
+                <button className="searchButton" onClick={searchClick}>Search</button>
+                <GeoLocator></GeoLocator>
+            </div>
         </div>
     )
 }

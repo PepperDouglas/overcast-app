@@ -1,3 +1,12 @@
+.topbarContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: stretch;
+}
+
 .maindiv {
     border-radius: 10px;
     text-align: -webkit-center;
@@ -21,16 +30,43 @@
 }
 
 .bottomData {
-    padding-top: 39vh;
+    padding-top: 4vh;
     margin-top: 0vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-content: center;
+    align-items: flex-start;
 }
 
-
 .cityP {
-    font-size: 3vw;
+    font-size: 4vh;
     margin-top: 3%;
 }
 
 .pData {
-    margin-top: -3vw;
+    margin-top: -4vh;
 }
+@media only screen and (max-width: 750px) {
+    .bottomData {
+        padding-top: 4vh;
+        margin-top: 0vh;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+    }
+
+    .cityP {
+        font-size: 3vh;
+        margin-top: 3%;
+    }
+
+    .subdiv {
+        width: 94%;
+    }
+}
+

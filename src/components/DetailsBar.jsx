@@ -49,15 +49,15 @@ const DetailsBar = (props) => {
     if(isDetailsShown){
         return(
             <div className="detailsContainer">
-                <div className="detailsUnit"><p className="detailText">{weatherDataColl[0]?.Date} || Max: {weatherDataColl[0]?.Max} || Min: {weatherDataColl[0]?.Min} ||</p> <img src={weatherDataColl[0]?.Img}></img></div>
+                <div className="detailsUnit"><p className="detailText">{weatherDataColl[0]?.Date}</p><div className="minMaxDiv"><p>Max: {weatherDataColl[0]?.Max}</p><p>Min: {weatherDataColl[0]?.Min}</p></div> <img src={weatherDataColl[0]?.Img}></img></div>
                 <span style={{color: "grey"}}>a</span>
-                <div className="detailsUnit"><p className="detailText">{weatherDataColl[1]?.Date} || Max: {weatherDataColl[1]?.Max} || Min: {weatherDataColl[1]?.Min} ||</p> <img src={weatherDataColl[1]?.Img}></img></div>
+                <div className="detailsUnit"><p className="detailText">{weatherDataColl[1]?.Date}</p><div className="minMaxDiv"><p>Max: {weatherDataColl[1]?.Max}</p><p>Min: {weatherDataColl[1]?.Min}</p></div> <img src={weatherDataColl[1]?.Img}></img></div>
                 <span style={{color: "grey"}}>a</span>
-                <div className="detailsUnit"><p className="detailText">{weatherDataColl[2]?.Date} || Max: {weatherDataColl[2]?.Max} || Min: {weatherDataColl[2]?.Min} ||</p> <img src={weatherDataColl[2]?.Img}></img></div>
+                <div className="detailsUnit"><p className="detailText">{weatherDataColl[2]?.Date}</p><div className="minMaxDiv"><p>Max: {weatherDataColl[2]?.Max}</p><p>Min: {weatherDataColl[2]?.Min}</p></div> <img src={weatherDataColl[2]?.Img}></img></div>
                 <span style={{color: "grey"}}>a</span>
-                <div className="detailsUnit"><p className="detailText">{weatherDataColl[3]?.Date} || Max: {weatherDataColl[3]?.Max} || Min: {weatherDataColl[3]?.Min} ||</p> <img src={weatherDataColl[3]?.Img}></img></div>
+                <div className="detailsUnit"><p className="detailText">{weatherDataColl[3]?.Date}</p><div className="minMaxDiv"><p>Max: {weatherDataColl[3]?.Max}</p><p>Min: {weatherDataColl[3]?.Min}</p></div> <img src={weatherDataColl[3]?.Img}></img></div>
                 <span style={{color: "grey"}}>a</span>
-                <div className="detailsUnit"><p className="detailText">{weatherDataColl[4]?.Date} || Max: {weatherDataColl[4]?.Max} || Min: {weatherDataColl[4]?.Min} ||</p> <img src={weatherDataColl[4]?.Img}></img></div>
+                <div className="detailsUnit"><p className="detailText">{weatherDataColl[4]?.Date}</p><div className="minMaxDiv"><p>Max: {weatherDataColl[4]?.Max}</p><p>Min: {weatherDataColl[4]?.Min}</p></div> <img src={weatherDataColl[4]?.Img}></img></div>
             </div>
     
         )
