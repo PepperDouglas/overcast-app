@@ -1,19 +1,14 @@
-import { useRef, useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { CityContext } from "../contexts/ContextProvider";
 import bin_svg from "../assets/bin.svg"
 import '../styles/favbar.css';
 
-
 const FavBar = () => {
 
-    const {city, updateCity, favArr, setFavArr, setTempCity} = useContext(CityContext);
-    const favsData = localStorage.getItem("favArr"); 
-    const initFavsArr = favsData ? JSON.parse(favsData) : [];
-    //const [favArr, setFavArr] = useState(initFavsArr);
+    const {favArr, setFavArr, setTempCity} = useContext(CityContext);
     
     useEffect(() => {
         const storedFavs = localStorage.getItem('favArr');
-        
         if (storedFavs) {
           setFavArr(JSON.parse(storedFavs));
         }
@@ -22,7 +17,6 @@ const FavBar = () => {
     const clickFav = (event) => {
         const selectedCity = event.target.innerText;
         if(event.target instanceof HTMLDivElement || event.target instanceof HTMLParagraphElement){
-            //Update city
             setTempCity(selectedCity);
         } else {
             const arrData = localStorage.getItem("favArr");
@@ -47,8 +41,7 @@ const FavBar = () => {
                             <img src={bin_svg} width="20px"></img>
                         </button>
                     </div>
-                )}
-            
+                )}           
             </div>
         )
     }

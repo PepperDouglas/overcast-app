@@ -1,10 +1,9 @@
-import React, {useState, createContext} from 'react' ;
+import {useState, createContext} from 'react' ;
 
-const CityContext = React.createContext();
+const CityContext = createContext();
 
 const ContextProvider = (props) => {
     
-    //City
     const updateCity = (val) =>{ setCity(val); }
     const[city, setCity] = useState('Stockholm');
     const[tempCity, setTempCity] = useState();
@@ -23,5 +22,3 @@ export {
     CityContext,
     ContextProvider
 }
-
-//export default ContextProvider;

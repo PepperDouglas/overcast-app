@@ -1,67 +1,23 @@
-//Get hard coded Stockholm to start with
-//Conditional rendering is needed to be learnt
-//Make an object to put weather state in instead of arrays
-
-import { useRef, useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { CityContext } from "../contexts/ContextProvider";
-import DetailsBar from "./DetailsBar";
 import { capitaliseFirstLetter } from "../functions/searchFunct";
 import { apiKey } from "../constants/constants";
+import DetailsBar from "./DetailsBar";
 import WeatherData from "../classes/WeatherData";
-import '../styles/topbar.css';
-import nightImg from "../assets/nighttime.png";
-import dayImg from "../assets/daytime.png";
 import SearchBar from "./SearchBar";
 import FavBar from "./FavBar";
+import nightImg from "../assets/nighttime.png";
+import dayImg from "../assets/daytime.png";
+import '../styles/topbar.css';
 
 const TopBar = ({cityprop}) => {
 
-    //style
-
-    //state & refs
-
-
-    const {city, updateCity, favArr, setFavArr, longlatcoord, tempCity, isDetailsShown, setShowDetails} = useContext(CityContext);
-    //const [city, setCity] = useState(props.city);
+    const {city, updateCity, setFavArr, longlatcoord, tempCity, isDetailsShown, setShowDetails} = useContext(CityContext);
     const [weatherData, setWeather] = useState({Time: "", Img: "", Temp: ""});
-    const [nightTime, setDayTime] = useState(false);
-    const [isFirstLoad, setFirstLoad] = useState(true);
     const [todBanner, setBanner] = useState(dayImg);
 
-    //functions
-    async function getCountryData (param) {
-        if(param == "" || param === undefined){
-            return;
-        }
-        const geoLocation = "";
-        console.log(param);
-        const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${param}`;
-        return await fetch(url, {referrerPolicy: "unsafe-url"}).then(res => {
-            if(!res.ok){
-                throw new Error("Bad Request");
-            }
-            return res.json();
-        })
-        .then(res => {
-            if(res != undefined){
-
-                const weather = new WeatherData(res.current.last_updated, res.current.temp_c, res.current.condition.icon)
-                setWeather(weather);
-                updateCity(capitaliseFirstLetter(res.location.name));
-            }
-        }).catch((error) => {
-            console.log("City not found." + error);
-        })
-    }
-
     useEffect(() => {
-        //here we could choose to use saved locale instead on load
-        console.log("Initial mounting!");
-        
-            //setFirstLoad(false);
-            getCountryData(cityprop);
-        
-
+        getCountryData(cityprop);
     }, []);
     
     useEffect(() => {
@@ -74,15 +30,33 @@ const TopBar = ({cityprop}) => {
 
     useEffect(() => {
         getCountryData(longlatcoord);
-    }, [longlatcoord])
-    
-        //getCountryData();
+    }, [longlatcoord]);
+
+    //functions
+    async function getCountryData (param) {
+        if(param == "" || param === undefined){
+            return;
+        }
+        const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${param}`;
+        return await fetch(url, {referrerPolicy: "unsafe-url"}).then(res => {
+            if(!res.ok){
+                throw new Error("Bad Request");
+            }
+            return res.json();
+        })
+        .then(res => {
+            if(res != undefined){
+                const weather = new WeatherData(res.current.last_updated, res.current.temp_c, res.current.condition.icon)
+                setWeather(weather);
+                updateCity(capitaliseFirstLetter(res.location.name));
+            }
+        }).catch((error) => {
+            console.log("City not found. " + error);
+        })
+    }
+
     const changeBanner = () => {
-        //it should check for it its night time
-        //Maybe check data weather_descriptions instead of if night is in url
         weatherData.Img.includes("night") ? setBanner(nightImg) : setBanner(dayImg);
-        //this one sets the css!
-        //console.log("Is it night?" + nightTime);
     }
     
     const addFavs = () => {
@@ -94,7 +68,7 @@ const TopBar = ({cityprop}) => {
         } else {
             const newData = JSON.parse(arrData);
             if (newData.includes(newCity)){
-                console.log("already added this city")
+                console.log("Already added this city");
                 return;
             }
             newData.push(newCity);
@@ -104,7 +78,6 @@ const TopBar = ({cityprop}) => {
     }
 
     const invertDetails = (event) => {
-        //alert(event.target.innerText);
         if(isDetailsShown){
             event.target.innerText = "See Details";
             setShowDetails(false);
@@ -113,13 +86,6 @@ const TopBar = ({cityprop}) => {
             setShowDetails(true);
         }
     }
-
-    //wash data
-
-    //mapping
-    
-
-    //main return
 
     return(
         <div className="topbarContainer">
@@ -145,7 +111,6 @@ const TopBar = ({cityprop}) => {
             </div>
         </div>
     )
-        //SearchBar is not really supposed to be here, but wuth context it makes sense from a design perspective. But not from a logical one!
 }
 
 export default TopBar;
