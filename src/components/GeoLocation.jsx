@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { CityContext } from "../contexts/ContextProvider";
 import '../styles/geolocation.css'
 
@@ -12,17 +12,14 @@ const GeoLocator = () => {
             longlat[0] = parseFloat(position.coords.longitude).toFixed(5).toString();
             longlat[1] = parseFloat(position.coords.latitude).toFixed(5).toString();
             setllCoord(longlat);
-            alert(longlat);
         }
         const failPos = () => {
-            alert("failed");
+            alert("Please allow your location.");
         }
         if(navigator.geolocation){
-            alert("its suppoirted!");
             navigator.geolocation.getCurrentPosition(retrPos, failPos);
         }
     }
-
 
     return(
         <>
