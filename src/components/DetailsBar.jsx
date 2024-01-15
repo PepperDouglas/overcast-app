@@ -15,20 +15,25 @@ const DetailsBar = () => {
 
     async function getCountryData () {
         const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=5&alerts=no&aqi=no`;
-        return await fetch(url, {referrerPolicy: "unsafe-url"}).then(res => res.json())
-        .then(res => {
-            if(res != undefined){
-                let newData = [];
-                for (let i = 0; i < 5; i++){   
-                    (function(i){
-                        let datablock = new DetailUnit(res.forecast.forecastday[i].date, res.forecast.forecastday[i].day.maxtemp_c, 
-                            res.forecast.forecastday[i].day.mintemp_c, res.forecast.forecastday[i].day.condition.icon)                       
-                            newData.push(datablock);
-                    })(i);                   
+        try {
+            return await fetch(url, {referrerPolicy: "unsafe-url"}).then(res => res.json())
+            .then(res => {
+                if(res != undefined){
+                    let newData = [];
+                    for (let i = 0; i < 5; i++){   
+                        (function(i){
+                            let datablock = new DetailUnit(res.forecast.forecastday[i].date, res.forecast.forecastday[i].day.maxtemp_c, 
+                                res.forecast.forecastday[i].day.mintemp_c, res.forecast.forecastday[i].day.condition.icon)                       
+                                newData.push(datablock);
+                        })(i);                   
+                    }
+                    setWeatherColl(newData);
                 }
-                setWeatherColl(newData);
-            }
-        });
+            });
+        }
+        catch (error){
+            console.log('Error: ' + error)
+        }
     }
 
     if(isDetailsShown){
