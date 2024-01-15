@@ -9,8 +9,8 @@ const GeoLocator = () => {
     const getGeoData = () => {
         let longlat = [];
         const retrPos = (position) => {
-            longlat[0] = parseFloat(position.coords.longitude).toFixed(5).toString();
-            longlat[1] = parseFloat(position.coords.latitude).toFixed(5).toString();
+            longlat[0] = parseFloat(position.coords.latitude).toFixed(5).toString();
+            longlat[1] = parseFloat(position.coords.longitude).toFixed(5).toString();
             setllCoord(longlat);
         }
         const failPos = () => {

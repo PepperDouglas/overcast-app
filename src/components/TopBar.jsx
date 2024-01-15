@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import { CityContext } from "../contexts/ContextProvider";
-import { capitaliseFirstLetter } from "../functions/searchFunct";
 import { apiKey } from "../constants/constants";
 import DetailsBar from "./DetailsBar";
 import WeatherData from "../classes/WeatherData";
@@ -48,7 +47,7 @@ const TopBar = ({cityprop}) => {
             if(res != undefined){
                 const weather = new WeatherData(res.current.last_updated, res.current.temp_c, res.current.condition.icon)
                 setWeather(weather);
-                updateCity(capitaliseFirstLetter(res.location.name));
+                updateCity(res.location.name);
             }
         }).catch((error) => {
             console.log("City not found. " + error);
